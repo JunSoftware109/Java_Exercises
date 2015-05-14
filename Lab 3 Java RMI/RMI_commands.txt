@@ -1,0 +1,16 @@
+//Compile the file
+"C:\Program Files\Java\jdk1.7.0_65\bin\javac" RemoteServerBallInterface.java RemoteServerBall.java RMIClientBat.java
+
+
+//Starts the rmiregistry naming server
+"C:\Program Files\Java\jdk1.7.0_65\bin\rmiregistry"
+
+
+"C:\Program Files\Java\jdk1.7.0_65\bin\rmic"
+
+
+//Starts the server
+"C:\Program Files\Java\jdk1.7.0_65\bin\java"  -classpath . -Djava.rmi.server.codebase=file:./ RemoteServerBall
+
+//Starts the client
+"C:\Program Files\Java\jdk1.7.0_65\bin\java" -classpath . RMIClientBat
