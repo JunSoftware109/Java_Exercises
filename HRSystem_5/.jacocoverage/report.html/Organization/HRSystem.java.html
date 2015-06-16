@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HRSystem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">HRSystem.java</span></div><h1>HRSystem.java</h1><pre class="source lang-java linenums">package Organization;
+public class HRSystem 
+{
+   private final Screen screen; // HRSystem's screen
+   private final Keypad keypad; // HRSystem's keypad
+   private final CompanyDatabase companyDatabase; // account information database
+   // constants corresponding to main menu options
+   private static final int EMPLOYEE_INQUIRY = 1;
+   private static final int COMPANY_DETAILS = 2;
+   private static final int HIRE = 3;
+   private static final int FIRE = 4;
+   private static final int VIEWPAYROLL = 5;
+   private static final int EXIT = 6;
+   
+   // no-argument HRSystem constructor initializes instance variables
+   public HRSystem() 
+<span class="nc" id="L17">   {</span>
+<span class="nc" id="L18">      screen = new Screen(); // create screen</span>
+<span class="nc" id="L19">      keypad = new Keypad(); // create keypad </span>
+<span class="nc" id="L20">      companyDatabase = new CompanyDatabase(); // create acct info database</span>
+<span class="nc" id="L21">   } // end no-argument HRSystem constructor</span>
+
+   // start HRSystem 
+   public void run()
+   {
+      // welcome and authenticate user; perform transactions
+      while ( true )
+      {
+         // loop while user is not yet authenticated
+<span class="nc" id="L30">        screen.displayMessageLine( &quot;\nWelcome!&quot; );       </span>
+         
+<span class="nc" id="L32">         performTransactions(); // user is now authenticated </span>
+<span class="nc" id="L33">         screen.displayMessageLine( &quot;\nThank you! Goodbye!&quot; );</span>
+      } // end while   
+   } // end method run
+
+
+   // display the main menu and perform transactions
+   private void performTransactions() 
+   {
+      // local variable to store transaction currently being processed
+<span class="nc" id="L42">      Transaction currentTransaction = null;</span>
+      
+<span class="nc" id="L44">      boolean userExited = false; // user has not chosen to exit</span>
+
+      // loop while user has not chosen option to exit system
+<span class="nc bnc" id="L47" title="All 2 branches missed.">      while ( !userExited )</span>
+      {     
+         // show main menu and get user selection
+<span class="nc" id="L50">         int mainMenuSelection = displayMainMenu();</span>
+
+         // decide how to proceed based on user's menu selection
+<span class="nc bnc" id="L53" title="All 3 branches missed.">         switch ( mainMenuSelection )</span>
+         {
+            // user chose to perform one of three transaction types
+            case EMPLOYEE_INQUIRY: 
+            case COMPANY_DETAILS: 
+            case HIRE:
+            case FIRE:
+            case VIEWPAYROLL:  
+                
+               // initialize as new object of chosen type
+<span class="nc" id="L63">               currentTransaction = createTransaction( mainMenuSelection );</span>
+
+<span class="nc" id="L65">               currentTransaction.execute(); // execute transaction</span>
+<span class="nc" id="L66">               break; </span>
+            case EXIT: // user chose to terminate session
+<span class="nc" id="L68">               screen.displayMessageLine( &quot;\nExiting the system...&quot; );</span>
+<span class="nc" id="L69">               userExited = true; // this HRSystem session should end</span>
+<span class="nc" id="L70">               break;</span>
+            default: // user did not enter an integer from 1-4
+<span class="nc" id="L72">               screen.displayMessageLine( </span>
+                  &quot;\nYou did not enter a valid selection. Try again.&quot; );
+               break;
+         } // end switch
+<span class="nc" id="L76">      } // end while</span>
+<span class="nc" id="L77">   } // end method performTransactions</span>
+   
+   // display the main menu and return an input selection
+   private int displayMainMenu()
+   {
+<span class="nc" id="L82">      screen.displayMessageLine( &quot;\nMain menu:&quot; );</span>
+<span class="nc" id="L83">      screen.displayMessageLine( &quot;1 - Employee Inquiry&quot; );</span>
+<span class="nc" id="L84">      screen.displayMessageLine( &quot;2 - Company Details&quot; );</span>
+<span class="nc" id="L85">      screen.displayMessageLine( &quot;3 - Hire Employee&quot; );</span>
+<span class="nc" id="L86">      screen.displayMessageLine( &quot;4 - Hire Employee&quot; );</span>
+<span class="nc" id="L87">      screen.displayMessageLine( &quot;5 - View Payroll&quot; );</span>
+<span class="nc" id="L88">      screen.displayMessageLine( &quot;6 - Exit\n&quot; );;</span>
+<span class="nc" id="L89">      screen.displayMessage( &quot;Enter a choice: &quot; );</span>
+<span class="nc" id="L90">      return keypad.getInput(); // return user's selection</span>
+   } // end method displayMainMenu
+         
+   // return object of specified Transaction subclass
+   private Transaction createTransaction( int type )
+   {
+<span class="nc" id="L96">      Transaction temp = null; // temporary Transaction variable</span>
+      
+      // determine which type of Transaction to create     
+<span class="nc bnc" id="L99" title="All 6 branches missed.">      switch ( type )</span>
+      {
+         case EMPLOYEE_INQUIRY: // create new EmployeeInquiry transaction
+<span class="nc" id="L102">            temp = new EmployeeInquiry( screen,keypad, companyDatabase );</span>
+<span class="nc" id="L103">            break;</span>
+         case COMPANY_DETAILS: // create new Withdrawal transaction
+<span class="nc" id="L105">            temp = new CompanyDetails( screen, keypad , </span>
+               companyDatabase );
+<span class="nc" id="L107">            break; </span>
+         case HIRE: // create new Deposit transaction
+<span class="nc" id="L109">            temp = new HireTransaction( screen, keypad, </span>
+               companyDatabase );
+<span class="nc" id="L111">            break;</span>
+         case FIRE: // create new Deposit transaction
+<span class="nc" id="L113">            temp = new FireTransaction( screen, keypad, </span>
+               companyDatabase );
+<span class="nc" id="L115">            break;</span>
+          case VIEWPAYROLL: // create new Deposit transaction
+<span class="nc" id="L117">            temp = new PayrollTransaction( screen, </span>
+            companyDatabase, keypad );
+            break;
+      } // end switch
+
+<span class="nc" id="L122">      return temp; // return the newly created object</span>
+   } // end method createTransaction
+} // end class HRSystem
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

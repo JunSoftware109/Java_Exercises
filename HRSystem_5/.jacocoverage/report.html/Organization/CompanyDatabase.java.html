@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CompanyDatabase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">CompanyDatabase.java</span></div><h1>CompanyDatabase.java</h1><pre class="source lang-java linenums">package Organization;
+// CompanyDatabase.java
+// Represents the bank account information database 
+import java.util.ArrayList;
+import java.util.Collections;
+public class CompanyDatabase
+{      
+<span class="nc" id="L8">   private ArrayList&lt;Employee&gt; empList = new ArrayList&lt;&gt;();//This creates a resizable-array of employee.</span>
+   public static int numberOfEmployees; // this static number of enginers will persist throughtout the life of application.
+   // no-argument CompanyDatabase constructor initializes accounts
+<span class="nc" id="L11">   public CompanyDatabase() {</span>
+<span class="nc" id="L12">   } // end no-argument CompanyDatabase constructor</span>
+   
+
+    // this method allows us to serch throgh empList for a certain employee
+    public boolean searchForEmployee(Employee emp) {   
+<span class="nc" id="L17">        return empList.contains(emp); 	  // checks to see if employee is in list.</span>
+    }
+    
+    // displays employee comtained in array list
+    public void getAllEmployeeDetails() {
+<span class="nc" id="L22">        int index = 0;</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">            if(empList.isEmpty()){</span>
+<span class="nc" id="L24">            System.out.println(&quot;Employee list is empty!&quot;);</span>
+            }
+            else{
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        for(Employee employees : empList) { // this is ternary notation simlyfying a typical for loop.</span>
+<span class="nc" id="L28">            System.out.println(&quot;\nID: &quot; + index);</span>
+<span class="nc" id="L29">            System.out.printf(&quot;Company has %s employees: &quot;, empList.size());</span>
+<span class="nc" id="L30">            System.out.println(employees);</span>
+<span class="nc" id="L31">            index++;                    </span>
+<span class="nc" id="L32">        }</span>
+      }
+<span class="nc" id="L34">    }</span>
+       
+    // This method displays all salaries of employees in the company
+    public void displayAllEmployeeEarnings () {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        for(Employee emp : empList){ // this is ternary notation simlyfying a typical for loop.</span>
+<span class="nc" id="L39">            System.out.printf(&quot;\nCalcEarnings: &quot; + emp.calcEarnings()+&quot;\nFor: &quot; + emp +&quot;\n&quot;);</span>
+<span class="nc" id="L40">        }       </span>
+<span class="nc" id="L41">    }</span>
+    
+    // This method sorts employee salary using
+    // collections class. It contains polymorphic algorithms
+    // that operate on collections. 
+    public void sortEmployeeSalary(){
+<span class="nc" id="L47">    Collections.sort(empList,new EmployeeSalaryCompare()); // we create an instanc of the EployeeSalaryCompare() class/</span>
+	     //generally process each element in empList
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            for(Employee e: empList){ // We create a looop to go through each employee and print details.</span>
+			//print out the sorted list of Salaries.
+<span class="nc" id="L51">                   	System.out.println(&quot;\nEmployee salary Order from lowest to highest Salaries&quot;+e);</span>
+<span class="nc" id="L52">	    }</span>
+<span class="nc" id="L53">    }</span>
+    
+    // This method sorts employee names using
+    // collections class. It contains polymorphic algorithms
+    // that operate on collections. 
+    public void sortEmployeeName(){
+<span class="nc" id="L59">    Collections.sort(empList,new EmployeeNameCompare());</span>
+    //generally process each element in empList
+<span class="nc bnc" id="L61" title="All 2 branches missed.">	    for(Employee em: empList){ // We create a looop to go through each employee and print details.</span>
+			//print out the sorted list of Names.
+<span class="nc" id="L63">                   	System.out.println(&quot;\nEmployee name Order from A to Z&quot;+em);</span>
+<span class="nc" id="L64">	    }</span>
+<span class="nc" id="L65">    }</span>
+    public void hire(Employee emp) {
+<span class="nc" id="L67">    	numberOfEmployees++; // this operator increments numberOfEmployees by 1.</span>
+<span class="nc" id="L68">	empList.add(emp); // this method will add to the empList</span>
+<span class="nc" id="L69">    }</span>
+
+    // this method enables us to remove employee from array list
+    public void fire(int ID) {
+<span class="nc" id="L73">       numberOfEmployees--; // this operator decrements numberOfEmployees by -1.</span>
+<span class="nc" id="L74">        empList.remove(ID); // this method will remove to the empList</span>
+<span class="nc" id="L75">    }</span>
+  
+} // end class CompanyDatabase
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

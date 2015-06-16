@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Employee.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">Employee.java</span></div><h1>Employee.java</h1><pre class="source lang-java linenums">package Organization;
+import Interfaces.Person;
+/*
+ * This abstract class provides partial implementation
+ * so the base classes build upon the methods such as
+ * calcSalary and toString method. It also implements Person interface
+*/
+public abstract class Employee implements Person {
+    private String name;
+    private static int id;
+    private Date hireDate;
+    public double salary;
+
+    //default constructor
+<span class="nc" id="L15">    public Employee() { }</span>
+
+<span class="nc" id="L17">    public Employee(String name, Date hireDate,int id, double salary) { //user-defined constructor</span>
+<span class="nc" id="L18">       this.name = name;// this keyword refers to current instance variable </span>
+<span class="nc" id="L19">       this.id = id;// this keyword refers to current instance variable </span>
+<span class="nc" id="L20">       this.hireDate = hireDate; // this keyword refers to current instance variable </span>
+<span class="nc" id="L21">       this.salary = salary;// this keyword refers to current instance variable </span>
+<span class="nc" id="L22">    }   </span>
+    
+   // method to setName 
+    @Override// indicates that this method overrides a superclass method
+    public void setName( String aName ){
+<span class="nc" id="L27">      name = aName; // </span>
+<span class="nc" id="L28">    } // end method setName</span>
+   
+    // method to getName 
+    @Override// indicates that this method overrides a superclass method
+    public String getName()  {
+<span class="nc" id="L33">      return name;</span>
+    } // end method getName
+    
+    // method to setId
+    public void setId ( int aId ){
+<span class="nc" id="L38">      id = aId; // </span>
+<span class="nc" id="L39">    } // end method setId</span>
+   
+    // method to getid
+    public int getId()  {
+<span class="nc" id="L43">      return id;</span>
+    } // end method getId
+    
+    // method to setHireDate
+    @Override// indicates that this method overrides a superclass method
+<span class="nc" id="L48">    public void setHireDate(Date d) {};</span>
+    
+    // method to getHireDate
+    @Override// indicates that this method overrides a superclass method
+<span class="nc" id="L52">    public Date getHireDate() {return hireDate; };</span>
+
+    // abstract method is empty as other classes can override this 
+    @Override// indicates that this method overrides a superclass method
+    public abstract double calcEarnings();
+   
+    // determines whether a user-specified PIN matches PIN in Account
+    public boolean validateId( int userId )
+    {
+<span class="nc bnc" id="L61" title="All 2 branches missed.">      if ( userId == id )</span>
+<span class="nc" id="L62">         return true;</span>
+      else
+<span class="nc" id="L64">         return false;</span>
+    } // end method validatePIN
+   
+    
+    // method to setSalary
+    @Override// indicates that this method overrides a superclass method
+    public void setSalary( double s) {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">      if ( s &gt;= 0.0 )</span>
+<span class="nc" id="L72">         salary = s;</span>
+      else
+<span class="nc" id="L74">        throw new IllegalArgumentException( </span>
+        &quot;Salary must be &gt;= 0.0&quot; );
+<span class="nc" id="L76">    };</span>
+    
+    // method to getSalary
+    @Override// indicates that this method overrides a superclass method
+<span class="nc" id="L80">    public double getSalary() {return salary; }; </span>
+    
+    // toString method is used to get a String object
+    // repersenting the value of the number object.
+    @Override// indicates that this method overrides a superclass method
+    public String toString() {
+<span class="nc" id="L86">    return String.format( &quot;\nName: %s Hired: %s Employee ID : %d Salary: %s    &quot;, name, hireDate, id, salary );         </span>
+    }
+}// end abtsract class Employee
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

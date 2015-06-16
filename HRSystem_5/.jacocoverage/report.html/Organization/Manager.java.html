@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Manager.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">Manager.java</span></div><h1>Manager.java</h1><pre class="source lang-java linenums">package Organization;
+
+import java.util.ArrayList;
+/*
+ * This class repersents a Manager who containts an arrayList for the number
+ * of Enginners that he contains. The Manager also contains a varible called bonus.
+ * @author C11452772
+ */
+public class Manager extends Employee {
+   // static Manager engArray; // This static field will allow engArray.
+<span class="nc" id="L11">    private ArrayList&lt;Employee&gt; engList = new ArrayList&lt;&gt;( );   //This creates a resizable-array of employee.</span>
+    public static int numberOfEngineers; // this static number of enginers will persist throughtout the life of application.
+    private double bonus; // this field contains double varibale that is exclusive to the manager.
+
+    
+    public Manager(String name, Date dateOfHire, int id, double salary, double bonus) {
+<span class="nc" id="L17">        super(name, dateOfHire, id, salary); // super keyword allows us to acces overridden method in base class.</span>
+<span class="nc" id="L18">        this.bonus = bonus; // We acess bonus field by using 'this' keyword.</span>
+<span class="nc" id="L19">    }</span>
+    
+    public void addEngineer(Engineer eng) {
+<span class="nc" id="L22">	numberOfEngineers++; // this increments nubmer of engineers.</span>
+<span class="nc" id="L23">	engList.add(eng); // we use add method to add engineer to list.</span>
+<span class="nc" id="L24">    }</span>
+
+    public void removeEngineer(Employee eng) {
+<span class="nc" id="L27">        numberOfEngineers--; // this decrements nubmer of engineers.</span>
+<span class="nc" id="L28">        engList.remove(eng); // we use remove method to remove engineer to list.</span>
+<span class="nc" id="L29">    }</span>
+    
+    public void displayAllEmployeeDetails() {
+         //generally process each element in engList
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for(Employee eng : engList){ // this is ternary notation simlyfying a typical for loop.</span>
+<span class="nc" id="L34">            System.out.printf(&quot;manager has %s engineers: &quot;, engList.size()); // prints number of enginner is engList array.</span>
+<span class="nc" id="L35">            System.out.println(eng.toString());  </span>
+<span class="nc" id="L36">        }</span>
+<span class="nc" id="L37">    }</span>
+    
+    // This method sets bonus of Manager
+    public void setBonus(double newbonus) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">              if ( bonus &gt;= 0.0 ) // checks to see if bonus is valid</span>
+<span class="nc" id="L42">         bonus = newbonus; </span>
+              else // invalid entry excelption is thrown.
+<span class="nc" id="L44">         throw new IllegalArgumentException( &quot;Base salary must be &gt;= 0.0&quot; );</span>
+<span class="nc" id="L45">    } //</span>
+    
+<span class="nc" id="L47">    public double getBonus() { return bonus; }</span>
+    
+    // Overriden method calcEarnings with its own implementation. Salary and
+    // Bonus are returned.
+    @Override// indicates that this method overrides a superclass method
+<span class="nc" id="L52">    public double calcEarnings() { return getSalary() + getBonus();}</span>
+    
+    // return string repersentation of manager object. We print bonus for Manager.
+    @Override// indicates that this method overrides a superclass method
+    public String toString() {    
+<span class="nc" id="L57">        return super.toString() + String.format (&quot;bonus : %s&quot;,bonus);</span>
+    }  
+} // End Manager class
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

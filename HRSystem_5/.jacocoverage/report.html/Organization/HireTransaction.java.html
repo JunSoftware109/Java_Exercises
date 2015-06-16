@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HireTransaction.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">HireTransaction.java</span></div><h1>HireTransaction.java</h1><pre class="source lang-java linenums">package Organization;
+import java.util.InputMismatchException;
+/**
+ *
+ * @author c11452772
+ */
+public class HireTransaction extends Transaction { 
+   private Screen screen; // HRSystem's screen
+   private Keypad keypad; // HRSystem's keypad
+   
+   // constant corresponding to menu option to cancel
+   private static final int MANAGER = 1;
+   private static final int ADMINISTRATOR = 2;
+   private static final int ENGINEER = 3;
+   private static final int EXIT = 4;
+  
+   public HireTransaction(Screen hrScreen,Keypad hrKeypad, CompanyDatabase hrCompanyDatabase) 
+   {
+<span class="nc" id="L19">        super(hrScreen, hrKeypad, hrCompanyDatabase);</span>
+<span class="nc" id="L20">        keypad = new Keypad();</span>
+<span class="nc" id="L21">        screen = new Screen();</span>
+<span class="nc" id="L22">   }</span>
+   
+   // display the main menu and perform transactions
+   private void performTransactions() 
+   {
+      // local variable to store transaction currently being processed
+      Transaction currentTransaction;
+<span class="nc" id="L29">      boolean userExited = false; // user has not chosen to exit</span>
+      // loop while user has not chosen option to exit system
+<span class="nc bnc" id="L31" title="All 2 branches missed.">      while ( !userExited )</span>
+      {     
+         // show main menu and get user selection
+<span class="nc" id="L34">         int mainMenuSelection = displayMainMenu();</span>
+
+         // decide how to proceed based on user's menu selection
+<span class="nc bnc" id="L37" title="All 3 branches missed.">         switch ( mainMenuSelection )</span>
+         {
+            // user chose to perform one of three transaction types
+            case MANAGER: 
+            case ADMINISTRATOR: 
+            case ENGINEER:     
+
+               // initialize as new object of chosen type
+<span class="nc" id="L45">               currentTransaction =   createTransaction( mainMenuSelection );</span>
+               //currentTransaction.execute(); // execute transaction
+<span class="nc" id="L47">               break; </span>
+            case EXIT: // user chose to terminate session
+<span class="nc" id="L49">               screen.displayMessageLine( &quot;\nExiting the system...&quot; );</span>
+<span class="nc" id="L50">               userExited = true; // this HRSystem session should end</span>
+<span class="nc" id="L51">               break;</span>
+            default: // user did not enter an integer from 1-4
+<span class="nc" id="L53">               screen.displayMessageLine( </span>
+                  &quot;\nYou did not enter a valid selection. Try again.&quot; );
+               break;
+         } // end switch
+<span class="nc" id="L57">      } // end while</span>
+<span class="nc" id="L58">   } // end method performTransactions</span>
+   
+    // display the main menu and return an input selection
+   private int displayMainMenu()
+   {
+      try{
+<span class="nc" id="L64">      screen.displayMessageLine( &quot;\nChoose an Employee:&quot; );</span>
+<span class="nc" id="L65">      screen.displayMessageLine( &quot;1 - Manager&quot; );</span>
+<span class="nc" id="L66">      screen.displayMessageLine( &quot;2 - Administrator&quot; );</span>
+<span class="nc" id="L67">      screen.displayMessageLine( &quot;3 - Engineer&quot; );</span>
+<span class="nc" id="L68">      screen.displayMessageLine( &quot;4 - Exit\n&quot; );</span>
+<span class="nc" id="L69">      screen.displayMessage( &quot;Enter a choice: &quot; );</span>
+<span class="nc" id="L70">      return keypad.getInput();</span>
+       }
+<span class="nc" id="L72">       catch(InputMismatchException e)</span>
+       {
+<span class="nc" id="L74">           System.err.printf(&quot;\nException:%s\n&quot;,e);</span>
+<span class="nc" id="L75">           keypad.getNextLine(); // get next input from the user</span>
+       }
+<span class="nc" id="L77">       return 0;</span>
+   } // end method displayMainMenu
+   
+   // return object of specified Transaction subclass
+   private Transaction createTransaction( int type )
+   {
+<span class="nc" id="L83">      Transaction temp = null; // temporary Transaction variable</span>
+      
+      // determine which type of Transaction to create     
+<span class="nc bnc" id="L86" title="All 4 branches missed.">      switch ( type )</span>
+      {
+         case MANAGER: // create new EmployeeInquiry transaction
+<span class="nc" id="L89">            createManager();</span>
+<span class="nc" id="L90">            break;</span>
+         case ADMINISTRATOR: // create new Withdrawal transaction
+<span class="nc" id="L92">            createAdministrator();</span>
+<span class="nc" id="L93">            break; </span>
+         case ENGINEER: // create new Withdrawal transaction
+<span class="nc" id="L95">            createEngineer();</span>
+            break; 
+             
+      } // end switch
+
+<span class="nc" id="L100">      return temp; // return the newly created object</span>
+   } // end method createTransaction
+   
+   public void createEngineer()
+   {
+<span class="nc" id="L105">      CompanyDatabase companyDatabase = getCompanyDatabase();</span>
+<span class="nc" id="L106">      Date hireeng = new Date (9, 3, 1994);</span>
+      try{
+<span class="nc" id="L108">      screen.displayMessage(&quot;New Engineer&quot; );         </span>
+<span class="nc" id="L109">      screen.displayMessageLine(&quot;Enter the Engineers name:&quot;);</span>
+<span class="nc" id="L110">      String name = keypad.getString();</span>
+      
+<span class="nc" id="L112">      screen.displayMessageLine(&quot;Enter Engineers ID:&quot;);</span>
+<span class="nc" id="L113">      int id = keypad.getInput();</span>
+      
+<span class="nc" id="L115">      System.out.println(&quot;Enter Engineers Salary:&quot;);   </span>
+<span class="nc" id="L116">      double salary = keypad.getDouble();</span>
+      
+<span class="nc" id="L118">      System.out.println(&quot;Enter Engineers speciality&quot;);</span>
+<span class="nc" id="L119">      String speciality = keypad.getString();</span>
+      
+<span class="nc" id="L121">      Engineer eng1 = new Engineer(name, hireeng , id, salary ,speciality);</span>
+<span class="nc" id="L122">      eng1.setHireDate(hireeng);</span>
+<span class="nc" id="L123">      companyDatabase.hire(eng1);</span>
+<span class="nc" id="L124">      screen.displayMessage(&quot;Employee has been added\n&quot; + eng1);</span>
+<span class="nc" id="L125">      screen.displayMessage( &quot;\nEmployee Information:&quot; );</span>
+<span class="nc" id="L126">      screen.displayMessage( &quot; - Available Employee: &quot; ); </span>
+<span class="nc" id="L127">      companyDatabase.getAllEmployeeDetails();</span>
+<span class="nc" id="L128">      screen.displayMessage( &quot;\nTotal Employees: &quot; );</span>
+<span class="nc" id="L129">      companyDatabase.toString();</span>
+<span class="nc" id="L130">      performTransactions();</span>
+      
+<span class="nc" id="L132">      }catch(Exception e1)</span>
+      {
+<span class="nc" id="L134">          System.err.printf(&quot;Excelption:\n&quot;,e1);</span>
+<span class="nc" id="L135">          screen.displayMessage(&quot;Please Enter correct ID:&quot;);</span>
+<span class="nc" id="L136">          keypad.getNextLine();  </span>
+<span class="nc" id="L137">      }</span>
+      
+<span class="nc" id="L139">   }</span>
+   public void createManager()
+   {
+<span class="nc" id="L142">      CompanyDatabase companyDatabase = getCompanyDatabase();</span>
+      //Instantiating the Manager
+<span class="nc" id="L144">      Date hiremanager1 = new Date (5, 8, 1989); </span>
+<span class="nc" id="L145">      screen.displayMessage(&quot;New Manager&quot; ); </span>
+<span class="nc" id="L146">      screen.displayMessageLine(&quot;Enter the Managers name:&quot;);</span>
+<span class="nc" id="L147">      String name = keypad.getString();</span>
+
+<span class="nc" id="L149">      screen.displayMessageLine(&quot;Enter Managers ID:&quot;);</span>
+<span class="nc" id="L150">      int id = keypad.getInput();</span>
+
+<span class="nc" id="L152">      screen.displayMessageLine(&quot;Enter Salary for the Manager:&quot;);</span>
+<span class="nc" id="L153">      double salary = keypad.getInput();</span>
+
+<span class="nc" id="L155">      screen.displayMessage(&quot;Enter Bonus for the Manager:&quot;);</span>
+<span class="nc" id="L156">      double bonus = keypad.getDouble();</span>
+
+<span class="nc" id="L158">      Manager m1 = new Manager(name, hiremanager1, id, salary, bonus );</span>
+<span class="nc" id="L159">      m1.setHireDate(hiremanager1);</span>
+<span class="nc" id="L160">      companyDatabase.hire(m1);</span>
+<span class="nc" id="L161">      screen.displayMessage(&quot;Employee has been added\n&quot; + m1);  </span>
+<span class="nc" id="L162">      screen.displayMessage( &quot;\nEmployee Information:&quot; );</span>
+<span class="nc" id="L163">      screen.displayMessage( &quot; - Available Employee: &quot; ); </span>
+<span class="nc" id="L164">      companyDatabase.getAllEmployeeDetails();</span>
+<span class="nc" id="L165">      screen.displayMessage( &quot;\nTotal Employees: &quot; );</span>
+<span class="nc" id="L166">      companyDatabase.toString();</span>
+<span class="nc" id="L167">      performTransactions();</span>
+<span class="nc" id="L168">  }</span>
+   
+   public void createAdministrator()
+   {
+<span class="nc" id="L172">     CompanyDatabase companyDatabase = getCompanyDatabase();</span>
+<span class="nc" id="L173">     screen.displayMessage(&quot;New Administrator&quot; );      </span>
+<span class="nc" id="L174">     Date hireadmin1 = new Date (7, 3, 1988);</span>
+     // Instantiating the Administrator
+<span class="nc" id="L176">     screen.displayMessageLine(&quot;Enter the Administrator name:&quot;);</span>
+<span class="nc" id="L177">     String name1 = keypad.getString();</span>
+    
+<span class="nc" id="L179">     screen.displayMessageLine(&quot;Enter Administrator ID:&quot;);</span>
+<span class="nc" id="L180">     int id1 = keypad.getInput();</span>
+    
+<span class="nc" id="L182">     screen.displayMessageLine(&quot;Enter Administrator Salary:&quot;);   </span>
+<span class="nc" id="L183">     int salary1 = keypad.getInput();</span>
+    
+<span class="nc" id="L185">     Administrator admin1 = new Administrator(name1, hireadmin1, id1, salary1, 5, 30, 100);</span>
+<span class="nc" id="L186">     admin1.setHireDate(hireadmin1);</span>
+<span class="nc" id="L187">     companyDatabase.hire(admin1);</span>
+<span class="nc" id="L188">     screen.displayMessage(&quot;Employee has been added\n&quot; + admin1);      </span>
+<span class="nc" id="L189">     screen.displayMessage( &quot;\nEmployee Information:&quot; );</span>
+<span class="nc" id="L190">     screen.displayMessage( &quot; - Available Employee: &quot; );      </span>
+<span class="nc" id="L191">     companyDatabase.getAllEmployeeDetails();</span>
+<span class="nc" id="L192">     screen.displayMessage( &quot;\nTotal Employees: &quot; );</span>
+<span class="nc" id="L193">     companyDatabase.toString();</span>
+<span class="nc" id="L194">     screen.displayMessage(&quot;&quot;+admin1 );</span>
+<span class="nc" id="L195">     performTransactions();</span>
+<span class="nc" id="L196">    }</span>
+    
+    @Override
+    public void execute() {
+<span class="nc" id="L200">      performTransactions();</span>
+     /* Date hireeng1 = new Date (9, 3, 1994);
+      Date hiretesteng1 = new Date (5, 8, 1997); 
+      Date hiretesteng2 = new Date (1, 5, 1992); 
+      Date hiredesigneng1 = new Date(5, 4, 1995);*/
+<span class="nc" id="L205">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

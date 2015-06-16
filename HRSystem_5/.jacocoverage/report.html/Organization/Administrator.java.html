@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Administrator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">Administrator.java</span></div><h1>Administrator.java</h1><pre class="source lang-java linenums">package Organization;
+/**
+ * This class representation an Administrator
+ * @author C11452772
+ */
+
+public class Administrator extends Employee{
+    private int numberOfWorkers; // this variable conatains workers under the administrator
+    private double overTimeRate; // this variable is only for the admin
+    public double hourlyWage; // this variable is only for the admin
+
+    public Administrator( String name, Date dateOfHire, int id, double salary,int theNumberOfWorkers, double theOverTimeRate, double theHourlyWage){
+<span class="nc" id="L13">        super(name, dateOfHire,id ,salary); // super allows us to override superclass methods and pass to employee constrcutor</span>
+<span class="nc" id="L14">        this.numberOfWorkers = theNumberOfWorkers;// this keyword refers to current instance variable </span>
+<span class="nc" id="L15">        this.overTimeRate = theOverTimeRate;// this keyword refers to current instance variable </span>
+<span class="nc" id="L16">        this.hourlyWage = theHourlyWage;// this keyword refers to current instance variable     </span>
+<span class="nc" id="L17">    }    </span>
+    //method to setNumberOfWorkers
+    public void setNumberOfWorkers( int theNumberOfWorkers ){
+<span class="nc" id="L20">        numberOfWorkers = theNumberOfWorkers;</span>
+<span class="nc" id="L21">    } // end method setNumberOfWorkers</span>
+
+    //method to getNumberOfWorkers
+<span class="nc" id="L24">    public int getNumberOfWorkers() { return numberOfWorkers; }   </span>
+   
+    //method to setOverTimeRate
+    public void setOverTimeRate( double theoverTimeRate ) {
+<span class="nc" id="L28">      overTimeRate = theoverTimeRate;</span>
+<span class="nc" id="L29">    } // end method setFirstName</span>
+
+    //method to getOverTimeRate
+<span class="nc" id="L32">    public double getOverTimeRate() { return overTimeRate;}</span>
+    
+    //method to setHourlyWage
+    public void setHourlyWage( double theHourlyWage) {
+<span class="nc" id="L36">        hourlyWage = theHourlyWage;</span>
+<span class="nc" id="L37">    }</span>
+    //method to getHourlyWage
+<span class="nc" id="L39">    public double getHourlyWage() { return hourlyWage; }</span>
+    
+    // our overrriden method add salary, hourly wage and multiplies with
+    // overtime for the administrator
+    @Override// indicates that this method overrides a superclass method
+    public double calcEarnings() {
+<span class="nc" id="L45">        return getSalary() + getHourlyWage() * getOverTimeRate();</span>
+    }
+    
+    // return string repersentation of Administrators methods
+    @Override// indicates that this method overrides a superclass method
+    public String toString(){    
+<span class="nc" id="L51">        return super.toString() + String.format(&quot; numberOfWorkers : %s overTimeRate : %s HourlyWage: %s &quot;,numberOfWorkers,overTimeRate,hourlyWage);</span>
+    }
+} // End class Administrator
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

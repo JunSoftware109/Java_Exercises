@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HRSystemTest.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;HRSystem_5&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Organization</a> &gt; <span class="el_source">HRSystemTest.java</span></div><h1>HRSystemTest.java</h1><pre class="source lang-java linenums">package Organization;
+// HRSystemTest.java
+// Driver program for the HRSystem case study3
+import java.util.Scanner;
+
+<span class="nc" id="L6">public class HRSystemTest</span>
+{
+   // main method creates and runs the HRSystem
+   public static void main( String[] args )
+   {
+<span class="nc" id="L11">      HRSystem theHRSystem = new HRSystem();    </span>
+<span class="nc" id="L12">      theHRSystem.run();</span>
+      
+    // creating Date objects for each employee
+   // Date hiree1 = new Date( 3, 12, 1988 );
+  //  Date hiree2 = new Date( 1, 2, 1998 );
+  //  Date hiree3 = new Date( 3, 12, 1994 );3
+  //  Date hiree4 = new Date( 3, 12, 1992 );
+   // Date hiremanager1 = new Date (5, 8, 1989);
+//    Date hireadmin1 = new Date (7, 3, 1988);
+<span class="nc" id="L21">    Date hireeng1 = new Date (9, 3, 1994);</span>
+<span class="nc" id="L22">    Date hiretesteng1 = new Date (5, 8, 1997); </span>
+<span class="nc" id="L23">    Date hiretesteng2 = new Date (1, 5, 1992); </span>
+<span class="nc" id="L24">    Date hiredesigneng1 = new Date(5, 4, 1995);</span>
+    
+    // Instantiating the Employees
+    // We use abstract class Employee to hold instances of its subclasses
+    
+  //  Employee e1 = new Manager( &quot;Bob Blue&quot;, hiree1, 90000, 450) {};
+    //e1.calcEarnings();
+   // Employee e2 = new Administrator( &quot;John Red&quot;, hiree2, 70000, 6, 300, 60.00 ) {};
+  //  Employee e3 = new Engineer ( &quot;Tim Old&quot;, hiree3, 3000, &quot;Software Engineer&quot; ) {};     
+  //  Employee e4 = new Engineer( &quot;Jack Wiley&quot;, hiree4, 3000, &quot;Electrical Engineer&quot; ) {};
+  
+     /*
+    // Instantiating the TestEngineer1
+    System.out.println(&quot;Enter the TestEngineer1 name:&quot;);
+    String name3 = input.next();
+    
+    System.out.println(&quot;Enter TestEngineer1 ID:&quot;);
+    int id3 = input.nextInt();
+    
+    System.out.println(&quot;Enter TestEngineer1 Salary:&quot;);   
+    double salary3 = input.nextDouble();
+    
+    System.out.println(&quot;Enter TestEngineer1 speciality&quot;);
+    String speciality1 = input.next();
+    
+    TestEngineer te1 = new TestEngineer(name3, hiretesteng1 , id3, salary3, speciality1);
+    te1.setHireDate(hiretesteng1);
+    System.out.println( te1 );
+     
+    // Instantiating the TestEngineer2
+    System.out.println(&quot;Enter the TestEngineer2 name:&quot;);
+    String name4 = input.next();
+    
+    System.out.println(&quot;Enter TestEngineer2 ID:&quot;);
+    int id4 = input.nextInt();
+    
+    System.out.println(&quot;Enter TestEngineer2 Salary:&quot;);   
+    double salary4 = input.nextDouble();
+    
+    System.out.println(&quot;Enter TestEngineer2 speciality&quot;);
+    String speciality2 = input.next();
+    
+    TestEngineer te2 = new TestEngineer(name4, hiretesteng2 , id4, salary4 ,speciality2);
+    te1.setHireDate(hiretesteng2);
+    System.out.println( te2 );
+     
+    // Instantiating the DesignEngineer
+    System.out.println(&quot;Enter the DesignEngineer name:&quot;);
+    String name5 = input.next();
+    
+    System.out.println(&quot;Enter DesignEngineer ID:&quot;);
+    int id5 = input.nextInt();
+    
+    System.out.println(&quot;Enter DesignEngineer Salary:&quot;);   
+    double salary5 = input.nextDouble();
+    
+    System.out.println(&quot;Enter DesignEngineer speciality&quot;);
+    String speciality3 = input.next();
+    
+    DesignEngineer de1 = new DesignEngineer(name5, hiredesigneng1, id5, salary5 ,speciality3);
+    de1.setHireDate(hiredesigneng1);
+    System.out.println( de1 );
+    
+    
+    // Instantiating the Company object
+    System.out.println( &quot;\nNew Company Object:&quot; ); 
+    CompanyDatabase company1 = new CompanyDatabase();
+    System.out.println( company1 ); 
+    company1.hire(m1);
+    company1.hire(admin1);
+    company1.hire(eng1);  
+    company1.hire(te1);
+    company1.hire(te2);
+    company1.hire(de1);
+    company1.getAllEmployeeDetails();
+   // company1.displayAllEmployeeEarnings();
+   // company1.sortEmployeeSalary();
+    //company1.sortEmployeeName();
+ 
+    // Check for employee in arrayList   
+    System.out.println(&quot;Enter emloyee name you want to search:&quot;);
+    String emp  = input.next();
+    if (company1.searchForEmployee(m1) == true) {
+    System.out.println( &quot;\nEmployee you were looking for is contained in the list&quot; + emp);
+    }
+    else 
+    {
+        System.out.println(emp +&quot; is not contained in the list&quot;); 
+    }
+      */
+<span class="nc" id="L114">   } // end main</span>
+} // end class HRSyste1mTest 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>
